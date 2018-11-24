@@ -10,6 +10,9 @@ public class RSAProgram {
 
     //    static private boolean inputCorrect = false;
     RSAProgram() {
+    int generateN(){
+        return this.p * this.q;
+    }
         Scanner s = new Scanner(System.in);
         while (true) {
             System.out.print("please enter the value for p, Make sure it is a PRIME!: ");
