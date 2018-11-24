@@ -10,6 +10,26 @@ public class RSAProgram {
 
     //    static private boolean inputCorrect = false;
     RSAProgram() {
+        providePandQ();
+        //=======================Totient (phi) of N =======================
+        this.n = generateN();
+        this.phiN = getTotient(p, q);
+        System.out.println("The totient of n is: " + phiN);
+        //====================== Public key  ==============================
+        this.e = generateE(this.phiN);
+        //====================== Private key ==============================
+        this.d = generatePrivateKey(this.e, this.phiN);
+    }
+
+    public int[] getPublicKey(){
+        return new int [] {this.e, this.n};
+    }
+
+    int generateN(){
+        return this.p * this.q;
+    }
+
+    void providePandQ(){
         Scanner s = new Scanner(System.in);
         while (true) {
             System.out.print("please enter the value for p, Make sure it is a PRIME!: ");
@@ -27,14 +47,6 @@ public class RSAProgram {
                 System.out.println(" and p is: " + p + "q is: " + q + ". Both are not Primes, please enter a different number. ");
             }
         }
-        //=======================Totient (phi) of N =======================
-        this.n = p * q;
-        this.phiN = getTotient(p, q);
-//        System.out.println("The totient of n is: " + phiN);
-        //====================== Public key  ==============================
-        this.e = generateE(this.phiN);
-        //====================== Private key ==============================
-        this.d = generatePrivateKey(this.e, this.phiN);
     }
 
     private boolean isPrime(int p) {
@@ -92,7 +104,7 @@ public class RSAProgram {
      * @param phi is the totient of n, in other words, it's phi(n) [phi of n].
      * @return whatever is the value of 'row2Right' variable as soon as row2Left becomes 1 .
      */
-    public static int generatePrivateKey(int e, int phi) {
+    private static int generatePrivateKey(int e, int phi) {
         int row1Left = phi;
         int row1Right = phi;
         int row2Left = e;
