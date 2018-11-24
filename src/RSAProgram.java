@@ -10,6 +10,20 @@ public class RSAProgram {
 
     //    static private boolean inputCorrect = false;
     RSAProgram() {
+        //=======================Totient (phi) of N =======================
+        this.n = generateN();
+        this.phiN = getTotient(p, q);
+        System.out.println("The totient of n is: " + phiN);
+        //====================== Public key  ==============================
+        this.e = generateE(this.phiN);
+        //====================== Private key ==============================
+        this.d = generatePrivateKey(this.e, this.phiN);
+    }
+
+    public int[] getPublicKey(){
+        return new int [] {this.e, this.n};
+    }
+
     int generateN(){
         return this.p * this.q;
     }
