@@ -84,7 +84,7 @@ public class RSAProgram {
             E = E / 2;
         }
         // increment until E is a prime number.
-        while (!(isPrime(E))) {
+        while (!(isPrime(E) && gcd(r, E) == 1)) {
             E += 1;
         }
 
@@ -140,4 +140,12 @@ public class RSAProgram {
         }
         return row2Right;
     }
+
+    public int getPubKey() { return e; }
+
+    public int getPriKey() { return d; }
+
+    public int getN() { return n; }
+
+    public int getPhiN() { return phiN; }
 }
