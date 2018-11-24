@@ -30,7 +30,7 @@ public class RSAProgram {
         //=======================Totient (phi) of N =======================
         this.n = p * q;
         this.phiN = getTotient(p, q);
-        System.out.println("The totient of n is: " + phiN);
+//        System.out.println("The totient of n is: " + phiN);
         //====================== Public key  ==============================
         this.e = generateE(this.phiN);
         //====================== Private key ==============================
@@ -68,7 +68,7 @@ public class RSAProgram {
             E = E / 2;
         }
         // increment until E is a prime number.
-        while (!(isPrime(E))) {
+        while (!(isPrime(E) && gcd(r, E) == 1)) {
             E += 1;
         }
 
@@ -124,4 +124,12 @@ public class RSAProgram {
         }
         return row2Right;
     }
+
+    public int getPubKey() { return e; }
+
+    public int getPriKey() { return d; }
+
+    public int getN() { return n; }
+
+    public int getPhiN() { return phiN; }
 }

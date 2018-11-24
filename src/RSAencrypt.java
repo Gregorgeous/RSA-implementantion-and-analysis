@@ -1,24 +1,32 @@
 public class RSAencrypt {
     private String cipherText = "";
 
-    RSAencrypt(String message, publicKey E, int N) {
+    RSAencrypt(String message, RSAProgram E) {
         for(char mText: message.toCharArray()) {
             int mInt = (int) mText;
             int cInt = mInt;
 
             // taking the int for each character in the message and running it through
             // m^E mod N. then mod'ing that number again so it can be made into ciphertext.
-            for(int i = 0; i < E.pubKey(); i++) {
-                cInt = (cInt * mInt) % N;
+            for(int i = 1; i < E.getPubKey(); i++) {
+                cInt = (cInt * mInt) % E.getN();
             }
 //            cInt = (cInt % 26) + 65; // '+ 65' so the character will be chosen from A-Z. can be alter later.
             char cText = (char) cInt;
-            System.out.println(cInt);
+//            System.out.println(cInt);
             cipherText += cInt;
         }
     }
 
-    public String getCipherText() {
-        return cipherText;
+    RSAencrypt(int message, RSAProgram E) {
+        int c = message;
+
+        for(int i = 1; i < E.getPubKey(); i++) {
+            c = (c * message) % E.getN();
+        }
+
+        cipherText += c;
     }
+
+    public String getCipherText() { return cipherText; }
 }
