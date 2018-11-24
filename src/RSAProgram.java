@@ -21,6 +21,10 @@ public class RSAProgram {
         this.d = generatePrivateKey(this.e, this.phiN);
     }
 
+    public int RSAIntDecrypt (int cipher) {
+        return (int) Math.pow(cipher, this.d) % this.n;
+    }
+
     public int[] getPublicKey(){
         return new int [] {this.e, this.n};
     }
