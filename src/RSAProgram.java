@@ -92,7 +92,7 @@ public class RSAProgram {
      * @param phi is the totient of n, in other words, it's phi(n) [phi of n].
      * @return whatever is the value of 'row2Right' variable as soon as row2Left becomes 1 .
      */
-    public static int generatePrivateKey(int e, int phi) {
+    private static int generatePrivateKey(int e, int phi) {
         int row1Left = phi;
         int row1Right = phi;
         int row2Left = e;
