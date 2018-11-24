@@ -10,6 +10,7 @@ public class RSAProgram {
 
     //    static private boolean inputCorrect = false;
     RSAProgram() {
+        providePandQ();
         //=======================Totient (phi) of N =======================
         this.n = generateN();
         this.phiN = getTotient(p, q);
