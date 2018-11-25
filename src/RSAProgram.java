@@ -14,7 +14,7 @@ public class RSAProgram {
         //=======================Totient (phi) of N =======================
         this.n = generateN();
         this.phiN = getTotient(p, q);
-        System.out.println("The totient of n is: " + phiN);
+//        System.out.println("The totient of n is: " + phiN);
         //====================== Public key  ==============================
         this.e = generateE(this.phiN);
         //====================== Private key ==============================

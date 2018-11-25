@@ -19,7 +19,7 @@ public class RSAencrypt {
     }
 
     RSAencrypt(int message, RSAProgram E) {
-        int c = message;
+        int c = message % E.getN();
 
         for(int i = 1; i < E.getPubKey(); i++) {
             c = (c * message) % E.getN();

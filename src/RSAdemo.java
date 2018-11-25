@@ -13,10 +13,10 @@ public class RSAdemo {
         System.out.println("public key: " + test2.getPubKey());
         System.out.println("private key: " + test2.getPriKey());
 
-        RSAencrypt cipherText2 = new RSAencrypt(2, test2);
-        System.out.println(cipherText2.getCipherText());
+        RSAencrypt cipherText2 = new RSAencrypt(123, test2);
+        System.out.println("ciphertext: " + cipherText2.getCipherText());
 
         RSAdecrypt messageTest2 = new RSAdecrypt(cipherText2.getCipherText(), test2);
-        System.out.println(messageTest2.getMessage());
+        System.out.println("plaintext: " + messageTest2.getMessage());
     }
 }
