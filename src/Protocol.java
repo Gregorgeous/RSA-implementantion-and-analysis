@@ -211,21 +211,33 @@ public class Protocol {
             final double FAR_ENOUGH_FACTOR = 0.33;
             int pCandidate = 0;
             int qCandidate = 0;
-            while (!pAndQFarAway || !pIsPrime || !qIsPrime) {
+            int randomDrawSpace = 45000;
+            System.out.println("SPACE: " + randomDrawSpace);
+            System.out.println("Randomly drawing p and q passing primality test. PLEASE WAIT ...");
+            while (true) {
+                System.out.println("NEW TRY");
                 pAndQFarAway = false;
                 pIsPrime = false;
                 qIsPrime = false;
-                pCandidate = (int) (Math.random() * Integer.MAX_VALUE + 2);
-                qCandidate = (int) (Math.random() * Integer.MAX_VALUE + 2);
-                if (Math.abs(pCandidate - qCandidate) > (int) (FAR_ENOUGH_FACTOR * Integer.MAX_VALUE)) {
+                pCandidate = (int) (Math.random() * randomDrawSpace + 2);
+                qCandidate = (int) (Math.random() * randomDrawSpace + 2);
+                if (Math.abs(pCandidate - qCandidate) > (int) (FAR_ENOUGH_FACTOR * randomDrawSpace)) {
                     pAndQFarAway = true;
+                } else {
+                    continue;
                 }
+                System.out.println("(1) Running primality check on:" + pCandidate);
                 pIsPrime = mr.isPrime(pCandidate, this.NUM_OF_ITERATIONS);
                 if (!pIsPrime) continue;
+                System.out.println("(2) Running primality check on:" + qCandidate);
                 qIsPrime = mr.isPrime(qCandidate, this.NUM_OF_ITERATIONS);
+                if (qIsPrime) {
+                    break;
+                }
             }
             this.p = pCandidate;
             this.q = qCandidate;
+            System.out.println("Generated p & q. \n p:" + p + "\n q:" + q);
         }
     }
 }
