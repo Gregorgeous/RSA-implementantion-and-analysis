@@ -1,14 +1,13 @@
 import java.util.*; //  allows me to use a scanner
 
 public class RSAProgram {
-    private int p;
-    private int q;
-    private int n;
-    private int phiN;
-    private int e;
-    private int d;
+    int p;
+    int q;
+    int n;
+    int phiN;
+    int e;
+    int d;
 
-    //    static private boolean inputCorrect = false;
     RSAProgram() {
         providePandQ();
         //=======================Totient (phi) of N =======================
