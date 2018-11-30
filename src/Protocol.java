@@ -95,8 +95,9 @@ public class Protocol {
         }
     }
 
-    public int RSAEncrypt (int message, int e, int n){
-        return (int) Math.pow(message, e) % n;
+    public int RSAEncrypt(int message, int e, int n) {
+        GFG rsaNonNaiveEncryption = new GFG(message, e, n);
+        return rsaNonNaiveEncryption .result;
     }
 
     public boolean isMessageReallyFromServer(Map<String,int[]> serverResponse){
@@ -191,11 +192,13 @@ public class Protocol {
         }
 
         public int signMessage(int message) {
-            return (int) Math.pow(message, this.d) % this.n;
+            GFG nonNaiveMessageSignature = new GFG(message, this.d, this.n);
+            return nonNaiveMessageSignature.result;
         }
 
         public int unSignMessage(int signedMessage) {
-            return (int) Math.pow(signedMessage, this.e) % this.n;
+            GFG nonNaiveMessageUnsigning = new GFG(signedMessage, this.e, this.n);
+            return nonNaiveMessageUnsigning.result;
         }
 
         /**

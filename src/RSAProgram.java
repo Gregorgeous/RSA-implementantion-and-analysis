@@ -21,7 +21,8 @@ public class RSAProgram {
     }
 
     public int RSAIntDecrypt (int cipher) {
-        return (int) Math.pow(cipher, this.d) % this.n;
+        GFG rsaNonNaiveDecryption =  new GFG(cipher,this.d,this.n);
+        return rsaNonNaiveDecryption.result;
     }
 
     public int[] getPublicKey(){
