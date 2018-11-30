@@ -135,12 +135,6 @@ public class Protocol {
 
     class TrustedServerRSA extends RSAProgram {
         private final int NUM_OF_ITERATIONS = 64;
-        private int p;
-        private int q;
-        private int n;
-        private int phiN;
-        private int e;
-        private int d;
         private int[] PKA;
         private int[] PKB;
 
