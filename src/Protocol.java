@@ -15,10 +15,14 @@ public class Protocol {
     private int bobNonceDecryptedByAlice;
 
     Protocol() {
+        System.out.println("============================= PART 2 OF THE COURSEWORK =============================");
+        System.out.println("STEP 0: Before the actual protocol, we need to create the 'server', 'Alice', and 'Bob' instances");
         this.Server = new TrustedServerRSA();
         this.pKS = Server.getPublicKey();
+        System.out.println("=============== CREATING 'ALICE' INSTANCE OF THE RSA PROGRAM =============== ");
         this.Alice = new RSAProgram();
         this.pKA = Alice.getPublicKey();
+        System.out.println("=============== NOW WE CREATE 'BOB' INSTANCE OF THE RSA PROGRAM =============== ");
         this.Bob = new RSAProgram();
         this.pKB = Bob.getPublicKey();
         Server.receivePublicKey(Alice.getPublicKey(), "ALICE");
@@ -26,7 +30,7 @@ public class Protocol {
     }
 
     public boolean run() {
-        System.out.println("INITIALISING THE PROTOCOL...");
+        System.out.println("============ INITIALISATION FINISHED.START OF THE ACTUAL PART OF THE PROTOCOL ============");
         System.out.println("Step 1: Alice asks server for Bob's public key");
         Map<String,int[]>  serverResponse= askServerForAPublicKey();
         System.out.println("Step 2: Server sent Alice a signed version of Bob's public key");
@@ -43,8 +47,8 @@ public class Protocol {
 //        ...
         System.out.println("Step 4: Bob asks server for Alice's public key");
         Map<String,int[]>  serverResponse2= askServerForAPublicKey();
-        System.out.println("Step 5: Bob asks server for Alice's public key");
         if (!isMessageReallyFromServer(serverResponse2)){
+        System.out.println("Step 5: (if you asked server for 'ALICE'): Server sent Bob a signed version of Alice's public key");
             System.out.println("The message has been intercepted! Digital signature from server doesn't match the original");
             System.out.println("This protocol instance has been compromised, aborting the protocol. Try running the protocol again");
             return false;
@@ -144,7 +148,7 @@ public class Protocol {
 
         @Override
         void providePandQ() {
-            System.out.println("Initialising server's RSA procedure... [expected result: server will have it's public and private keys");
+            System.out.println("Initialising server's RSA procedure... [expected result: server will have it's public and private keys]");
             MillerRabin mr = new MillerRabin();
             drawRandomPAndQ(mr);
         }
