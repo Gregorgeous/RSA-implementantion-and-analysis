@@ -1,20 +1,19 @@
-import java.util.*; //  allows me to use a scanner
+import java.util.*;
 
 public class RSAProgram {
-    private int p;
-    private int q;
-    private int n;
-    private int phiN;
-    private int e;
-    private int d;
+    int p;
+    int q;
+    int n;
+    int phiN;
+    int e;
+    int d;
 
-    //    static private boolean inputCorrect = false;
     RSAProgram() {
         providePandQ();
-        //=======================Totient (phi) of N =======================
+        //======================= N  ======================================
         this.n = generateN();
+        //======================= Totient (phi) of N  =====================
         this.phiN = getTotient(p, q);
-//        System.out.println("The totient of n is: " + phiN);
         //====================== Public key  ==============================
         this.e = generateE(this.phiN);
         //====================== Private key ==============================
@@ -22,7 +21,8 @@ public class RSAProgram {
     }
 
     public int RSAIntDecrypt (int cipher) {
-        return (int) Math.pow(cipher, this.d) % this.n;
+        GFG rsaNonNaiveDecryption =  new GFG(cipher,this.d,this.n);
+        return rsaNonNaiveDecryption.result;
     }
 
     public int[] getPublicKey(){
@@ -30,10 +30,16 @@ public class RSAProgram {
     }
 
     int generateN(){
-        return this.p * this.q;
+        System.out.println("Step 2: Program generates 'n' from the given p & q");
+        int n = this.p * this.q;
+        System.out.println("n = " + n);
+        return n;
     }
 
     void providePandQ(){
+        System.out.println("STEP 1: PROVIDE P AND Q");
+        System.out.println("Instructions: Please provide integers p & q such that both of them are prime numbers.\n " +
+                "(This program presents an academic version of the RSA, therefore accepts only Integers up to a value: 2,147,483,647)");
         Scanner s = new Scanner(System.in);
         while (true) {
             System.out.print("please enter the value for p, Make sure it is a PRIME!: ");
@@ -67,16 +73,22 @@ public class RSAProgram {
 
     // Euler's Totient is a smaller value of n, the calculation being p-1 * q-1
     private int getTotient(int p, int q) {
+        System.out.println("Step 3: Program generates totient of n (also called 'phi of n')\n" +
+                "phi(n) is a product of (p-1) * (q-1) ");
         int pN = p - 1;
         int qN = q - 1;
-        return pN * qN;
+        phiN = pN * qN;
+        System.out.println("Phi(n) = " + phiN);
+        System.out.println("(*NOTE*: this information is confidential and made as such \n " +
+                "by the program by labelling both the function and the end variable as 'private'. \n" +
+                "It is outputed here only for a demonstration of how the program works) ");
+        return phiN;
     }
 
 
     private int generateE(int r) { // r being Totient of N.
-//        System.out.println("Totient of N is " + r);
-
-        // standard public key as it is a large prime number.
+        System.out.println("Step 4: Program generates e used in composing the public key: PK =(e,n)");
+                // standard public key as it is a large prime number.
         int E = 65537;
 
         // if 65537 is too large then we will half it until it is smaller than r.
@@ -88,6 +100,7 @@ public class RSAProgram {
             E += 1;
         }
 
+        System.out.println("e = " + E);
         return E;
     }
 
@@ -109,6 +122,8 @@ public class RSAProgram {
      * @return whatever is the value of 'row2Right' variable as soon as row2Left becomes 1 .
      */
     private static int generatePrivateKey(int e, int phi) {
+        System.out.println("Step 5: Program generates a private key d by using Extended Euclidean Algorithm \n" +
+                "and the previously generated e and phi(n)");
         int row1Left = phi;
         int row1Right = phi;
         int row2Left = e;
@@ -138,6 +153,10 @@ public class RSAProgram {
             row2Left = newNumLeft;
             row2Right = newNumRight;
         }
+        System.out.println("d = " + row2Right);
+        System.out.println("(*NOTE*: this information is confidential and made as such \n " +
+                "by the program by labelling both the function and the end variable as 'private'. \n" +
+                "It is outputed here only for a demonstration of how the program works) ");
         return row2Right;
     }
 

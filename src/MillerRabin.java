@@ -59,25 +59,4 @@ public class MillerRabin
     {
         return BigInteger.valueOf(a).multiply(BigInteger.valueOf(b)).mod(BigInteger.valueOf(mod)).longValue();
     }
-    /** Main function **/
-    public static void main (String[] args)
-    {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Miller Rabin Primality Algorithm Test\n");
-        /** Make an object of MillerRabin class **/
-        MillerRabin mr = new MillerRabin();
-        /** Accept number **/
-        System.out.println("Enter number\n");
-        long num = scan.nextLong();
-        /** Accept number of iterations **/
-        System.out.println("\nEnter number of iterations");
-        int k = scan.nextInt();
-        /** check if prime **/
-        boolean prime = mr.isPrime(num, k);
-        if (prime)
-            System.out.println("\n"+ num +" is prime");
-        else
-            System.out.println("\n"+ num +" is composite");
-
-    }
 }
