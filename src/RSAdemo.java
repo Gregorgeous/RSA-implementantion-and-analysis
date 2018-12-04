@@ -16,7 +16,7 @@ public class RSAdemo {
         RSAencrypt cipherText2 = new RSAencrypt(123, test2);
         System.out.println("ciphertext: " + cipherText2.getCipherText());
 
-        RSAdecrypt messageTest2 = new RSAdecrypt(cipherText2.getCipherText(), test2);
+        RSAdecrypt messageTest2 = new RSAdecrypt(cipherText2.getCipherInt(), test2);
         System.out.println("plaintext: " + messageTest2.getMessage());
     }
 }

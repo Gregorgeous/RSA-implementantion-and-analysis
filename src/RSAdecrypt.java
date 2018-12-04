@@ -1,19 +1,21 @@
 public class RSAdecrypt {
     private String message = "";
+    private int messageInt;
 
     private int nLength;
     private String encryptChar = "";
 
-    RSAdecrypt(String cipherText, RSAProgram D) {
+    RSAdecrypt(int cipherInt, RSAProgram D) {
 
-        int eInt = Integer.parseInt(cipherText);
+        int eInt = cipherInt;
         int dInt = eInt;
         for(int j = 1; j < D.getPriKey(); j++) {
             dInt = (dInt * eInt) % D.getN();
         }
-        message += dInt;
+        messageInt = dInt;
 
     }
 
     public String getMessage() { return message; }
+    public int getMessageInt() { return messageInt; }
 }

@@ -1,5 +1,6 @@
 public class RSAencrypt {
     private String cipherText = "";
+    private int cipherInt;
 
     RSAencrypt(String message, RSAProgram E) {
         for(char mText: message.toCharArray()) {
@@ -25,8 +26,10 @@ public class RSAencrypt {
             c = (c * message) % E.getN();
         }
 
-        cipherText += c;
+        cipherInt = c;
     }
 
     public String getCipherText() { return cipherText; }
+
+    public int getCipherInt() { return cipherInt; }
 }

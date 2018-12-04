@@ -43,6 +43,16 @@ public class Main {
     private void part1() {
         System.out.println("You selected part 1: RSA program Demonstration");
         RSAProgram RSADemo = new RSAProgram();
+        System.out.println("Step 6: Provide an Integer(m) to be encrypted.");
+        Scanner s = new Scanner(System.in);
+        System.out.print("please enter the value you would like encrypted, Make sure it is < n !: ");
+        int userInt = s.nextInt();
+        System.out.println("Step 7: Encrypt " + userInt + " using m^e mod n.");
+        RSAencrypt encryptDemo = new RSAencrypt(userInt, RSADemo);
+        System.out.println(userInt + " has been encrypted to " + encryptDemo.getCipherInt() + "(c)");
+        System.out.println("Step 8: Decrypt " + encryptDemo.getCipherInt() + " using c^d mod n");
+        RSAdecrypt decryptDemo = new RSAdecrypt(encryptDemo.getCipherInt(), RSADemo);
+        System.out.println(encryptDemo.getCipherInt() + " has been decrypted to " + decryptDemo.getMessageInt());
     }
 
     private void part2() {
